@@ -22,19 +22,19 @@ api.use(jwt({
         algorithms: ['HS256'] // algo used for (un)signing the token
     }).unless({
         path: [ // list of routes that are not checked for jw token
-            { url: '/api/v1/auth/login', methods: ['POST'] },
-            { url: '/api/v1/auth/forgot-password', methods: ['POST'] },
-            { url: '/api/v1/auth/reset-password', methods: ['POST'] },
+            { url: '/login', methods: ['POST'] },
+            { url: '/forgot-password', methods: ['POST'] },
+            { url: '/reset-password', methods: ['POST'] },
         ]
     })
 );
 
-api.post('/api/v1/auth/login', Auth.login);
-api.get('/api/v1/auth/refresh-token', Auth.refreshToken);
-api.get('/api/v1/auth/logout', Auth.logout);
+api.post('/login', Auth.login);
+api.get('/refresh-token', Auth.refreshToken);
+api.get('/logout', Auth.logout);
 
-api.post('/api/v1/auth/forgot-password', Auth.forgotPassword);
-api.post('/api/v1/auth/reset-password', Auth.resetPassword);
+api.post('/forgot-password', Auth.forgotPassword);
+api.post('/reset-password', Auth.resetPassword);
 
 // check if the output is "unauthorized error"
 // and if so, show the "invalid token..." text

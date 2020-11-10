@@ -15,8 +15,8 @@ api.use(upload({
     limits: { fileSize: 50 * 1024 * 1024 }
 }));
 
-api.post('/api/v1/storage', storage.save);
-api.get('/api/v1/storage/:file', storage.retrieve);
+api.post('/', storage.save);
+api.get('/:file', storage.retrieve);
 
 api.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {

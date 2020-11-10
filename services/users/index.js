@@ -16,19 +16,19 @@ api.use(jwt({
     algorithms: ['HS256'] // algo used for (un)signing the token
 }).unless({
     path: [ // list of routes that are not checked for jw token
-        { url: '/api/v1/users', methods: ['POST', 'GET'] },
-        { url: '/api/v1/users/confirm', methods: ['POST'] },
+        { url: '/', methods: ['POST', 'GET'] },
+        { url: '/confirm', methods: ['POST'] },
         // { url: /\/api\/v1\/users\/.*/, methods: ['GET'] },
     ]
 })
 );
 
-api.post('/api/v1/users', Users.create);
-api.get('/api/v1/users', Users.getAll);
-api.get('/api/v1/users/:id', Users.getOne);
-api.put('/api/v1/users/:id', Users.update);
-api.delete('/api/v1/users/:id', Users.remove);
-api.post('/api/v1/users/confirm', Users.confirm);
+api.post('/', Users.create);
+api.get('/', Users.getAll);
+api.get('/:id', Users.getOne);
+api.put('/:id', Users.update);
+api.delete('/:id', Users.remove);
+api.post('/confirm', Users.confirm);
 
 // check if the output is "unauthorized error"
 // and if so, show the "invalid token..." text
