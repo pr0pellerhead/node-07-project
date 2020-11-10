@@ -11,17 +11,17 @@ const api = express();
 api.use(bodyParser.json());
 // json web token middleware checks if a jw token was sent with 
 // the request in the Authorization header
-api.use(jwt({
-        secret: config.Get('server').jwt_key, // the secret key that we have in the config.json
-        algorithms: ['HS256'] // algo used for (un)signing the token
-    }).unless({
-        path: [ // list of routes that are not checked for jw token
-            { url: '/api/v1/auth/login', methods: ['POST'] },
-            { url: '/api/v1/auth/forgot-password', methods: ['POST'] },
-            { url: '/api/v1/auth/reset-password', methods: ['POST'] },
-        ]
-    })
-);
+// api.use(jwt({
+//         secret: config.Get('server').jwt_key, // the secret key that we have in the config.json
+//         algorithms: ['HS256'] // algo used for (un)signing the token
+//     }).unless({
+//         path: [ // list of routes that are not checked for jw token
+//             { url: '/api/v1/auth/login', methods: ['POST'] },
+//             { url: '/api/v1/auth/forgot-password', methods: ['POST'] },
+//             { url: '/api/v1/auth/reset-password', methods: ['POST'] },
+//         ]
+//     })
+// );
 
 api.post('/api/v1/auth/login', Auth.login);
 api.get('/api/v1/auth/refresh-token', Auth.refreshToken);
