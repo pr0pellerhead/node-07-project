@@ -8,6 +8,12 @@ const Auth = require('./handlers/auth');
 
 const api = express();
 
+api.use((req, res, next) => {
+    console.log(req.baseUrl);
+    console.log(req.url);
+    next();
+});
+
 api.use(bodyParser.json());
 // json web token middleware checks if a jw token was sent with 
 // the request in the Authorization header
@@ -22,12 +28,6 @@ api.use(jwt({
         ]
     })
 );
-
-api.use((req, res, next) => {
-    console.log(req.baseUrl);
-    console.log(req.url);
-    next();
-});
 
 api.post('/api/v1/auth/login', Auth.login);
 api.get('/api/v1/auth/refresh-token', Auth.refreshToken);
