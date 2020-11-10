@@ -6,15 +6,15 @@ const app = express();
 
 app.use('/api/v1/users', proxy(
     'http://localhost:10001', 
-    { proxyReqPathResolver: () => 'http://localhost:10001/api/v1/users' }
+    { proxyReqPathResolver: (req) => `http://localhost:10001${req.path}` }
 ));
 app.use('/api/v1/auth', proxy(
     'http://localhost:10002', 
-    { proxyReqPathResolver: () => 'http://localhost:10002/api/v1/auth' }
+    { proxyReqPathResolver: (req) => `http://localhost:10002${req.path}` }
 ));
 app.use('/api/v1/files', proxy(
     'http://localhost:10003', 
-    { proxyReqPathResolver: () => 'http://localhost:10003/api/v1/files' }
+    { proxyReqPathResolver: (req) => `http://localhost:10003${req.path}` }
 ));
 
 app.use('/', proxy('localhost:3000'));
