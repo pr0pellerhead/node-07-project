@@ -6,7 +6,8 @@ const save = (req, res) => {
         return res.status(400).send('bad file type');
     }
     let file = `${makeid(10)}_${req.files.document.name}`;
-    let savepath = `${__dirname}/../../../../${config.Get('storage').dir}${req.user.id}_${file}`;
+    // let savepath = `${__dirname}/../../../../${config.Get('storage').dir}${req.user.id}_${file}`;
+    let savepath = `${__dirname}/../../../${config.Get('storage').dir}${req.user.id}_${file}`;
     req.files.document.mv(savepath);
     res.status(200).send({ file: file });
 };
