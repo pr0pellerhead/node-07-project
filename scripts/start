@@ -1,0 +1,23 @@
+#!/bin/bash
+trap "kill 0" EXIT
+case $1 in
+    "all")
+        echo "Running all services";
+        cd "$(dirname "$0")/../services" > /dev/null;
+        for d in *; do
+                echo "Startig service [$d]";
+                cd .. > /dev/null
+                npx nodemon "services/$d/index.js" &
+                cd - > /dev/null
+        done
+    ;;
+    *)
+        echo "Running $1";
+        cd "$(dirname "$0")/.." > /dev/null;
+        npx nodemon "services/$1/index.js" &
+    ;;
+esac
+wait
+
+# chmod +x start 
+# makes the file named "start" executable
