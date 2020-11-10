@@ -19,9 +19,11 @@ app.use('/api/v1/files', proxy(
 
 app.use('/', proxy('localhost:3000'));
 
-app.listen(config.Get('services').proxy.port, err => {
+let port = process.env.PORT || config.Get('services').proxy.port;
+
+app.listen(port, err => {
     if (err) {
         return console.error(err);
     }
-    console.log(`Server started on port ${config.Get('services').proxy.port}`);
+    console.log(`Server started on port ${port}`);
 });
